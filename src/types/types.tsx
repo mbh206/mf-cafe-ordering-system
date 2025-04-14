@@ -1,7 +1,7 @@
 export interface Drink {
-	id: String;
-	name: String;
-	description: String;
-	img: String;
+	id: number;
+	name: string;
+	description: string;
+	img: string;
 	price: number;
 }
