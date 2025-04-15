@@ -68,13 +68,17 @@ const App: React.FC = () => {
 		console.log(`The new cart total is:`, updatedTotal);
 	};
 
+	const orderCheckout = () => {
+		alert('Processing your order. Please wait...');
+	};
+
 	return (
 		<div className='grid grid-cols-4 font-serif'>
 			<div className='col-span-3 flex flex-col'>
-				<h1 className='uppercase text-center text-2xl border-b shadow-md py-2 text-orange-900 sticky'>
+				<h1 className='uppercase text-center text-2xl border-b shadow-md py-2 bg-white/50 backdrop-blur-md text-orange-900 fixed w-[75%]'>
 					Cafe Ordering System
 				</h1>
-				<div className='flex flex-wrap gap-5 m-4 justify-center'>
+				<div className='flex flex-wrap gap-5 m-4 justify-center pt-12'>
 					{drinks.map((drink) => {
 						return (
 							<DrinkItems
@@ -102,7 +106,7 @@ const App: React.FC = () => {
 						<h3 className='text-center pb-4'>Cart</h3>
 						<table className='w-full border-t border-orange-900/10'>
 							<thead>
-								<tr className='grid grid-cols-7 border-b border-orange-900/10 text-orange-600/60'>
+								<tr className='grid grid-cols-7 border-b border-orange-900/10 text-orange-600/60 text-xs'>
 									<td className='col-span-2'>
 										<p>Name</p>
 									</td>
@@ -119,7 +123,7 @@ const App: React.FC = () => {
 								</tr>
 							</thead>
 							<thead>
-								<tr className='grid grid-cols-6 py-3  border-b border-orange-900/10'>
+								<tr className='grid grid-cols-6 py-3 border-b border-orange-900/10 text-sm'>
 									{currentCart.drinks.map((drink) => {
 										return (
 											<CartComponent
@@ -136,9 +140,17 @@ const App: React.FC = () => {
 							</thead>
 						</table>
 					</div>
-					<button className='bg-blue-500 hover:bg-blue-600 text-white w-full rounded-md py-3 text-xl font-bold uppercase mb-6'>
-						Checkout
-					</button>
+					{currentCart.drinks.length > 0 ? (
+						<button
+							onClick={orderCheckout}
+							className='bg-blue-500 hover:bg-blue-600 text-white w-full rounded-md py-3 text-xl font-bold uppercase mb-6'>
+							Checkout
+						</button>
+					) : (
+						<button className='bg-blue-300 text-white w-full rounded-md py-3 text-xl font-bold uppercase mb-6'>
+							Checkout
+						</button>
+					)}
 				</div>
 			</div>
 		</div>

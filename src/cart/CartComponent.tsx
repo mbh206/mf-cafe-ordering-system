@@ -1,5 +1,4 @@
 import React from 'react';
-import { Cart } from '../types/types';
 import { Drink } from '../types/types';
 
 interface CartProps {
@@ -8,14 +7,14 @@ interface CartProps {
 }
 
 const CartComponent: React.FC<CartProps> = ({ drink, reduceCartDrink }) => {
-	console.log(drink, ' is from the cart component');
+	console.log(drink.name, ' is from the cart component');
 
 	return (
 		<>
 			<td className='col-span-2 mt-2'>
 				<p>{drink.name}</p>
 			</td>
-			<td className='mt-2 text-left'>
+			<td className='mt-2 text-left text-orange-800/60'>
 				<p>{drink.price}</p>
 			</td>
 			<td className='mt-2 text-left'>
