@@ -5,3 +5,8 @@ export interface Drink {
 	img: string;
 	price: number;
 }
+
+export interface Cart {
+	drinks: Array<Drink & { quantity: number }>;
+	total: number;
+}
