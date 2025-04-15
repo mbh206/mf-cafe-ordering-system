@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import logo from './logo.svg';
 import DrinkItems from './drink-items/DrinkItems';
+import CartComponent from './cart/CartComponent';
 import { drinks } from './data/mock-drinks';
 import { Drink } from './types/types';
 import { Cart } from './types/types';
@@ -119,29 +120,14 @@ const App: React.FC = () => {
 							</thead>
 							<thead>
 								<tr className='grid grid-cols-6 py-3  border-b border-orange-900/10'>
-									{currentCart.drinks.map((drink) => (
-										<>
-											<td className='col-span-2 mt-2'>
-												<p>{drink.name}</p>
-											</td>
-											<td className='mt-2 text-left'>
-												<p>{drink.price}</p>
-											</td>
-											<td className='mt-2 text-left'>
-												<p>{drink.quantity}</p>
-											</td>
-											<td className='mt-2 text-left'>
-												<p>{drink.price * drink.quantity}</p>
-											</td>
-											<td className='flex gap-2 col-span-1'>
-												<button
-													onClick={() => reduceCartDrink(drink)}
-													className='rounded-lg py-1 px-2 bg-white text-xl font-bold bg-orange-700/30 hover:bg-orange-900/30'>
-													–
-												</button>
-											</td>
-										</>
-									))}
+									{currentCart.drinks.map((drink) => {
+										return (
+											<CartComponent
+												drink={drink}
+												reduceCartDrink={reduceCartDrink}
+											/>
+										);
+									})}
 								</tr>
 								<tr className='grid grid-cols-5 border-b border-orange-900/10 text-orange-800'>
 									<td className='col-span-3 text-right mr-4'>Total:</td>
