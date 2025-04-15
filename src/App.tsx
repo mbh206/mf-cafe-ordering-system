@@ -10,6 +10,33 @@ const App: React.FC = () => {
 		drinks: [],
 		total: 0,
 	});
+	const reduceCartDrink = (drink: Drink) => {
+		let updatedCart;
+		const existingDrink = currentCart.drinks.find(
+			(item) => item.id === drink.id
+		);
+		if (existingDrink?.quantity !== 1) {
+			updatedCart = currentCart.drinks.map((drink) =>
+				drink.id === existingDrink?.id
+					? { ...drink, quantity: drink.quantity - 1 }
+					: drink
+			);
+			console.log(`decreasing the ${existingDrink?.name} quantity in the cart`);
+		} else {
+			updatedCart = currentCart.drinks.filter(
+				(drink) => drink.id !== existingDrink.id
+			);
+			console.log(`removed ${existingDrink.name} to cart`);
+		}
+		const updatedTotal = updatedCart.reduce(
+			(sum, drink) => sum + drink.price * drink.quantity,
+			0
+		);
+
+		setCurrentCart({ drinks: updatedCart, total: updatedTotal });
+		console.log(`The new cart total is:`, updatedTotal);
+	};
+
 	const addToCart = (drink: Drink) => {
 		let newCart;
 		const existingDrink = currentCart.drinks.find(
@@ -21,7 +48,7 @@ const App: React.FC = () => {
 					? { ...drink, quantity: drink.quantity + 1 }
 					: drink
 			);
-			console.log(`updating ${existingDrink.name} quantity in the cart`);
+			console.log(`Increasing the ${existingDrink.name} quantity in the cart`);
 			console.log(newCart);
 		} else {
 			const addNewDrink = {
@@ -91,7 +118,7 @@ const App: React.FC = () => {
 								</tr>
 							</thead>
 							<thead>
-								<tr className='grid grid-cols-7 py-3'>
+								<tr className='grid grid-cols-6 py-3  border-b border-orange-900/10'>
 									{currentCart.drinks.map((drink) => (
 										<>
 											<td className='col-span-2 mt-2'>
@@ -107,17 +134,16 @@ const App: React.FC = () => {
 												<p>{drink.price * drink.quantity}</p>
 											</td>
 											<td className='flex gap-2 col-span-1'>
-												<button className='rounded-lg py-1 px-2 bg-white text-xl font-bold bg-orange-700/30 hover:bg-orange-900/30'>
+												<button
+													onClick={() => reduceCartDrink(drink)}
+													className='rounded-lg py-1 px-2 bg-white text-xl font-bold bg-orange-700/30 hover:bg-orange-900/30'>
 													–
-												</button>
-												<button className='rounded-lg py-1 px-2 bg-white text-xl font-bold bg-orange-700/30 hover:bg-orange-900/30'>
-													+
 												</button>
 											</td>
 										</>
 									))}
 								</tr>
-								<tr className='grid grid-cols-5'>
+								<tr className='grid grid-cols-5 border-b border-orange-900/10 text-orange-800'>
 									<td className='col-span-3 text-right mr-4'>Total:</td>
 									<td className='col-span-2'>{currentCart.total}</td>
 								</tr>
