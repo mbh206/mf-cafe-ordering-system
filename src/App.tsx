@@ -127,6 +127,7 @@ const App: React.FC = () => {
 									{currentCart.drinks.map((drink) => {
 										return (
 											<CartComponent
+												key={drink.id}
 												drink={drink}
 												reduceCartDrink={reduceCartDrink}
 											/>
