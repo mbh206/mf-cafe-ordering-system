@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import logo from './logo.svg';
+import logo from './logo.png';
 import DrinkItems from './drink-items/DrinkItems';
 import CartComponent from './cart/CartComponent';
 import { drinks } from './data/mock-drinks';
@@ -75,9 +75,6 @@ const App: React.FC = () => {
 	return (
 		<div className='grid grid-cols-4 font-serif'>
 			<div className='col-span-3 flex flex-col'>
-				<h1 className='uppercase text-center text-2xl border-b shadow-md py-2 bg-white/50 backdrop-blur-md text-orange-900 fixed w-[75%]'>
-					Cafe Ordering System
-				</h1>
 				<div className='flex flex-wrap gap-5 m-4 justify-center pt-12'>
 					{drinks.map((drink) => {
 						return (
@@ -106,7 +103,7 @@ const App: React.FC = () => {
 						<h3 className='text-center pb-4'>Cart</h3>
 						<table className='w-full border-t border-orange-900/10'>
 							<thead>
-								<tr className='grid grid-cols-7 border-b border-orange-900/10 text-orange-600/60 text-xs'>
+								<tr className='grid grid-cols-7 border-b border-orange-900/10 text-orange-600 text-xs'>
 									<td className='col-span-2'>
 										<p>Name</p>
 									</td>
@@ -123,19 +120,20 @@ const App: React.FC = () => {
 								</tr>
 							</thead>
 							<thead>
-								<tr className='grid grid-cols-6 py-3 border-b border-orange-900/10 text-sm'>
+								<tr className='grid grid-cols-7 py-3 border-b border-orange-900/10 text-sm'>
 									{currentCart.drinks.map((drink) => {
 										return (
 											<CartComponent
 												drink={drink}
 												reduceCartDrink={reduceCartDrink}
+												addToCart={addToCart}
 											/>
 										);
 									})}
 								</tr>
-								<tr className='grid grid-cols-5 border-b border-orange-900/10 text-orange-800'>
+								<tr className='flex justify-center border-b border-orange-900/10 text-orange-600'>
 									<td className='col-span-3 text-right mr-4'>Total:</td>
-									<td className='col-span-2'>{currentCart.total}</td>
+									<td className='col-span-2'>¥{currentCart.total}</td>
 								</tr>
 							</thead>
 						</table>

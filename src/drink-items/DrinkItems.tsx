@@ -19,13 +19,13 @@ const DrinkItems: React.FC<DrinkProps> = ({
 					src={img}
 					alt={name}
 				/>
-				<div className='relative py-2'>
+				<div className='flex justify-between py-2'>
 					<p className='uppercase text-center'>{name}</p>
-					<p className='absolute right-0 top-0 text-gray-400'>¥{price}</p>
+					<p className='text-gray-900 font-extrabold'>¥{price}</p>
 				</div>
 				<p className='flex-grow'>{description}</p>
 				<button
-					className='w-full uppercase bg-blue-500 text-white rounded-md hover:bg-blue-600 py-2 mt-5'
+					className='w-full bg-blue-500 text-white rounded-md hover:bg-blue-600 py-2 mt-5'
 					onClick={() => addToCart({ id, name, description, img, price })}>
 					Add To Cart
 				</button>
